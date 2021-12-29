@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block ExtraCss %}
+{% endblock ExtraCss %}
+
+
+{% block content %}
+{% comment %} <h1>HomePage</h1>
+{% if user.is_authenticated %}
+    <a class="nav-item nav-link" href="{% url 'users:ProfileView' %}">Profile</a>
+    <a class="nav-item nav-link" href="{% url 'users:logout' %}">Logout</a>
+{% else %}
+    <a class="nav-item nav-link" href="{% url 'users:login' %}">Login</a>
+    <a class="nav-item nav-link" href="{% url 'users:RegisterView' %}">Register</a>
+{% endif %} {% endcomment %}
+
+<main class="m-4">
+    <section class="mt-4 text-center">
+        <h3>Popular Categories</h3>
+        <div class="row carousel-cont">
+            <div class="col">
+                <div class="category-cont">
+                    <div class="overlay"></div>
+                    <img src="https://cdn.kwork.com/files/menu_cover/x1/1084-1620898316.jpg" alt=" ">
+                    <!-- <p class="sub-heading ">Category</p> -->
+                </div>
+            </div>
+            <div class="col ">
+                <div class="category-cont ">
+                    <div class="overlay "></div>
+                    <img src="https://cdn.kwork.com/files/menu_cover/x1/1084-1620898316.jpg " alt="">
+                    <!-- <p class="sub-heading">Category</p> -->
+                </div>
+            </div>
+            <div class="col">
+                <div class="category-cont">
+                    <div class="overlay"></div>
+                    <img src="https://cdn.kwork.com/files/menu_cover/x1/1084-1620898316.jpg" alt=" ">
+                    <!-- <p class="sub-heading ">Category</p> -->
+                </div>
+            </div>
+            <div class="col ">
+                <div class="category-cont ">
+                    <div class="overlay "></div>
+                    <img src="https://cdn.kwork.com/files/menu_cover/x1/1084-1620898316.jpg " alt="">
+                    <!-- <p class="sub-heading">Category</p> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-4 text-center">
+        <h3 class="mb-4">Explore More</h3>
+        <div class="row">
+            {% for gig in gigs %}
+            <div class="col-sm-6 col-md-4">
+                <div class="shop__thumb">
+                    <a href="{{gig.get_absolute_url}}">
+                        <div class="shop-thumb__img">
+                            <img src="{{gig.image.url}}" class="img-responsive" alt="..." height="300px">
+                        </div>
+                        <h5 class="shop-thumb__title">
+                            {{gig.name}}
+                        </h5>
+                        <div class="shop-thumb__price">
+                            $ {{gig.get_basic_package.price}}
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock content %}
+
+
+{% block ExtraJs %}
+{% endblock ExtraJs %}

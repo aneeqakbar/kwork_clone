@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block ExtraCss %}
+{% endblock ExtraCss %}
+
+
+{% block content %}
+{% block header %}
+{% endblock header %}
+
+<section class="text-center">
+  <h2 class="display-4">You have been logged out</h2>
+  <div class="pt-3">
+    <a href="{% url 'users:login' %}" class="text-muted">Log In Again</a>
+  </div>
+</section>
+
+{% endblock content %}
+
+
+{% block ExtraJs %}
+{% endblock ExtraJs %}

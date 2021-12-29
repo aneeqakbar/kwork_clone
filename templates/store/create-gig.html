@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block ExtraCss %}
+{% endblock ExtraCss %}
+
+
+{% block content %}
+{% block header %}
+{% endblock header %}
+
+<section class="container">
+  <div class="content-section card p-4">
+    <div class="media row d-flex align-items-center mb-4">
+      <div class="col-md-4">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+
+      </div>
+      <div class="col-md-8">
+        <div class="media-body ms-4">
+          <h3 class="account-heading lead">{{ user.username }}</h3>
+          <p class="text-secondary">{{ user.email }}</p>
+          {% if user.profile.role == "s" %}
+            <small class="text-danger">{{user.profile.get_role_display}} Account</small>
+            {% else %}
+            <small class="text-success">{{user.profile.get_role_display}} Account</small>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <h2 class="mb-4">Create Gig</h2>
+            {{ form|crispy }}
+
+            <div class="row">
+              <div class="col-md-4 mt-4">
+                <h3 class="display-4 text-center">Basic</h3>
+                <input type="hidden" name="package_type" value="1">
+                {{ package_form|crispy }}
+                <input type="checkbox" name="source_1">
+              </div>
+              <div class="col-md-4 mt-4">
+                <h3 class="display-4 text-center">Standard</h3>
+                <input type="hidden" name="package_type" value="2">
+                {{ package_form|crispy }}
+                <input type="checkbox" name="source_2">
+              </div>
+              <div class="col-md-4 mt-4">
+                <h3 class="display-4 text-center">Premium</h3>
+                <input type="hidden" name="package_type" value="3">
+                {{ package_form|crispy }}
+                <input type="checkbox" name="source_3">
+              </div>
+            </div>
+              {% comment %} <div id="div_id_category" class="form-group mt-2">
+              <label for="id_category" class=" requiredField">Category<span class="asteriskField">*</span> </label>
+              <div class="">
+                <input type="text" name="category" maxlength="255" class="textinput textInput form-control" required="" id="id_category">
+              </div>
+            </div> {% endcomment %}
+        </fieldset>
+        <div class="form-group mt-4">
+            <button class="btn btn-outline-info" type="submit">Create</button>
+        </div>
+    </form>
+  </div>
+</section>
+
+{% endblock content %}
+
+
+{% block ExtraJs %}
+{% endblock ExtraJs %}
